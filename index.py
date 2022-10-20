@@ -3,8 +3,8 @@ import os
 
 
 currentFile = ''
+appName = 'Automato'
 
-appName = 'AA'
 
 def test(string): 
     print(string)
