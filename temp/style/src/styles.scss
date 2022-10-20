@@ -1,0 +1,45 @@
+@import "__variables";
+
+@import "colors";
+@import "reset";
+@import "font";
+@import "marpad";
+@import "layout";
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.disabledTask {
+    opacity: 0.5;
+}
+
+.task:not(:last-child) {
+    border-bottom: 3px solid var(--primary-700)
+}
+
+.flat {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.view-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.view-grid input {
+    width: 100%;
+}
+
+input {
+    border: none;
+    padding: 5px
+}
+
+.head {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
+    z-index: 99;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="js/vue.js"></script>
+
+    <link rel="stylesheet" href="style/dist/styles.css">
+</head>
+
+<body>
+
+    <div id="app" class="display-flex flex-direction-column" style="overflow: none; height: 100vh;">
+        <div class="head">
+            <button>Open</button>
+            <button>Save</button>
+            <button>Run</button>
+        </div>
+
+        <div class="body flex-grow-1" style="overflow: auto">
+            <taskcontainer v-for="(task, index) in tasks" :data="task" :index="index" :list="tasks"></taskcontainer>
+        </div>
+    </div>
+
+
+
+    <template id="taskTemplate">
+        <details class="bg-primary-900 color-primary-200 padding-1 task" open :class="{disabledTask: data.disabled}">
+            <summary class="taskHead display-flex justify-content-space-between margin-bottom-1">
+
+                <div class="fontsize-18">
+                    <span class="color-grey-500">
+                        #{{ index }}
+                        {{ data.type }}
+                    </span>
+    
+                    <input type="text" v-model="data.name" class="bg-transparent border-color-transparent">
+                </div>
+
+                <div class="color-grey-500">
+                    <button @click="this.$root.deleteTask(list, index)" class="flat margin-right-1">
+                        Delete
+                    </button>
+                    <label for="" class="margin-right-1">
+                        Disable
+                        <input type="checkbox" v-model="data.disabled" class="bg-transparent">
+                    </label>
+                    <label>
+                        Add Task
+                        <select class="flat">
+                            <option v-for="taskType in this.$root.taskTypes" @click="this.$root.addTask(list, index, taskType.name)">{{ taskType.name }}</option>
+                        </select>
+                    </label>
+                </div>
+    
+            </summary>
+            <div class="taskBody">
+
+                <div v-if="Object.keys(data).includes('childTasks')" style="margin-left: 2rem; border: 3px solid var(--primary-700)">
+                    <taskcontainer v-for="(ctask, cindex) in data.childTasks" :data="ctask" :index="cindex" :list="data.childTasks"></taskcontainer>
+
+                    <div v-if="data.childTasks.length == 0" class="padding-1">
+                        Empty Container ... add                         <select class="flat">
+                            <option v-for="taskType in this.$root.taskTypes" @click="this.$root.addTask(data.childTasks, index, taskType.name)">{{ taskType.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div v-else class="view-grid">
+
+                    <div v-for="(defaultValue, key) in this.$root.taskTypes[data.type]['arguments']">
+                        {{ this.$root.getD(data, key, defaultValue) }}
+
+                        <label for="">
+                            <div style="margin-bottom: 10px; margin-top: 16px">{{ key.charAt(0).toUpperCase() + key.slice(1) }}</div>
+                            <input type="text" v-model="data.arguments[key]">
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </details>
+    </template>
+
+    <script src="index.js" type="module"></script>
+</body>
+
+</html>

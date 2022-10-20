@@ -1,0 +1,17 @@
+@each $distName, $distance in $distances {
+    @each $direction in $directions {
+
+        .margin#{$direction}-#{$distName} {
+            margin#{$direction}: $distance
+        }
+        .padding#{$direction}-#{$distName} {
+            padding#{$direction}: $distance
+        }
+        .child-margin#{$direction}-#{$distName} > * {
+            margin#{$direction}: $distance
+        }
+        .child-padding#{$direction}-#{$distName} > * {
+            padding#{$direction}: $distance
+        }
+    }
+}

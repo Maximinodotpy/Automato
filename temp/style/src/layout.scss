@@ -1,0 +1,20 @@
+@each $_, $util in $layoutRules {
+
+    $prop: map-get($util, property);
+
+    @each $value in map-get($util, "values") {
+        .#{$prop}-#{$value} {
+            #{$prop}: $value
+        }
+        
+        @each $breakpointName, $breakpointValue in $breakpoints {
+            
+            @media screen and (max-width: #{$breakpointValue}) {                
+                .#{$prop}-#{$value}\@#{$breakpointName} {
+                    #{$prop}: $value
+                }
+            }
+
+        }
+    }
+}

@@ -1,0 +1,1 @@
+[{"name":"New Item","disabled":false,"type":"Initiate Variable","arguments":{"name":"hello","value":"59834"}},{"name":"Nfasdfasdfasd","disabled":false,"type":"If Statement","arguments":{"expression":"5 == 5"},"childTasks":[{"name":"New Item","disabled":false,"type":"Open Websites","arguments":{"urls":"https://maximmaeder.com"}}]}]

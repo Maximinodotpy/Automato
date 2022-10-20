@@ -1,0 +1,143 @@
+@import "__variables";
+
+@import "colors";
+@import "reset";
+@import "font";
+@import "marpad";
+@import "layout";
+
+
+body {
+  font-family: 'Segoe UI', sans-serif,
+}
+
+.disabledTask {
+  opacity: 0.2;
+}
+
+.task:not(:last-child) {
+  border-bottom: 3px solid var(--primary-100)
+}
+
+.task:first-child {
+  padding-top: 16px
+}
+
+.task:last-child {
+  padding-bottom: 16px
+}
+
+.task {
+  animation-name: popin;
+  animation-duration: 500ms;
+}
+
+@keyframes popin {
+  from {
+    transform: scale(1.1)
+  }
+
+  to {
+    transform: scale(1)
+  }
+}
+
+
+.flat {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.view-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.view-grid input {
+  width: 100%;
+}
+
+input,
+button {
+  border: none;
+  padding: 5px;
+  background-color: var(--grey-300);
+  font-family: inherit;
+}
+
+button:hover {
+  background-color: var(--grey-200);
+  cursor: pointer;
+}
+
+.head {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
+  z-index: 99;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+
+.taskSelectorPanel {
+  width: 200px;
+  height: 300px;
+  background-color: var(--grey-400);
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.taskSelectorPanelContainer {
+  z-index: 100;
+  position: relative;
+}
+
+.taskSelectorPanel input,
+.taskSelectorPanel button {
+  width: 100%
+}
+
+.taskActions {
+  opacity: 0.3
+}
+
+.task:hover>.taskHead>.taskActions {
+  opacity: 1
+}
+
+.rightSideContainer {
+  overflow: auto;
+  border: 1px solid var(--grey-300);
+  height: 100%;
+}
+
+.rightSideContainerHead {
+  position: sticky;
+  top: 0;
+  text-align: right;
+}
+
+
+
+
+table {
+  text-align: left;
+  border-collapse: collapse;
+}
+
+td, th {
+  text-align: left;
+  padding: 0.7rem
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--grey-200)
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <title>Document</title>
+
+    <script src="js/vue.js"></script>
+
+    <link rel="stylesheet" href="style/dist/styles.css">
+</head>
+
+<body>
+
+    <div id="app" class="display-flex flex-direction-column bg-grey-100 color-grey-900"
+        style="overflow: hidden; height: 100vh;">
+
+        <div class="head bg-grey-300">
+            <button @click="openAutomationFile">Open</button>
+            <button @click="saveAutomationFile">Save</button>
+            <button @click="runAutomation">Run</button>
+            <taskselector :taskcontainer="tasks" :insertindex="tasks.length" :buttontext="'Add Task at End'">
+            </taskselector>
+        </div>
+
+
+        <hsplit-container draggerwidth="20" class="body flex-grow-1 bg-grey-100" preserve="MainSplit" start="70"
+            style="overflow: hidden" max="97">
+            <div style="overflow-y: auto; overflow-x: hidden">
+                <taskcontainer v-for="(task, index) in tasks" :data="task" :index="index" :list="tasks"></taskcontainer>
+
+                <div v-if="tasks.length == 0" class="display-flex justify-content-center align-items-center"
+                    style="height: 80vh">
+                    <taskselector :taskcontainer="tasks" :insertindex="tasks.length" :buttontext="'Add First Task'">
+                    </taskselector>
+                </div>
+            </div>
+            <div class="child-padding-1" style="display: flex; flex-direction: column; justify-content: stretch">
+
+                <div class="rightSideContainer">
+                    <h2 class="fontsize-24 rightSideContainerHead">JSON Data</h2>
+                    <code><pre>{{ tasks }}</pre></code>
+                </div>
+
+                <div class="rightSideContainer">
+                    <h2 class="fontsize-24 rightSideContainerHead">Help</h2>
+                    <div v-for="task in taskTypes">
+                        <div>
+                            <h2>{{ task.name }} <i>{{ task.category }}</i></h2>
+                            <p>{{ task.desctiption }}</p>
+                        
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="param in task.parameters">
+                                        <td>{{ param.nameLong }}</td>
+                                        <td>{{ param.type }}</td>
+                                        <td>{{ param.defaultValue }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rightSideContainer">
+                    <h2 class="fontsize-24 rightSideContainerHead">Output</h2>
+                    <div>
+                        <code><pre>{{ taskTypes }}</pre></code>
+                    </div>
+                </div>
+
+            </div>
+        </hsplit-container>
+    </div>
+
+
+
+    <template id="taskTemplate">
+        <div class="bg-grey-100 padding-1 padding-top-2 padding-bottom-2 task" open
+            :class="{disabledTask: data.disabled}">
+
+            <taskhead :data="data" :index="index" :list="list"></taskhead>
+
+            <div class="taskBody">
+
+                <div class="view-grid">
+                    <div v-for="paramName in this.$root.taskTypes[data.type].parameters" style="border: 1px solid var(--grey-200); padding: 1rem">
+                        <div style="margin-bottom: 10px">
+                            {{ paramName.nameLong }}
+                        </div>
+
+                        <div v-if="paramName.type=='string'">
+                            <input type="text" v-model="data.parameters[paramName.nameShort]">
+                            <div 
+                                class="bg-warning-100 color-warning-600 warningPanel"
+                                style="padding: 5px; margin-top: 5px"
+                                v-if="data.parameters[paramName.nameShort].length < paramName.typeSpecificInfo.min">
+
+                                Invalid Text ( Too Long or to Short )
+                            </div>
+                        </div>
+                        <div v-else-if="paramName.type == 'string-list'">
+                            <string-list v-model="data.parameters[paramName.nameShort]"></string-list>
+                        </div>
+                        <div v-else-if="paramName.type == 'path-list'">
+                            <path-list v-model="data.parameters[paramName.nameShort]"></path-list>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="margin-top-1" v-if="Object.keys(data).includes('childTasks')"
+                    style="margin-left: 2rem; border: 2px solid var(--primary-100)">
+                    <taskcontainer v-for="(ctask, cindex) in data.childTasks" :data="ctask" :index="cindex"
+                        :list="data.childTasks"></taskcontainer>
+
+                    <div v-if="data.childTasks.length == 0" class="padding-1">
+                        Empty Container ... <taskselector :taskcontainer="data.childTasks" :insertindex="0"
+                            :buttontext="'Add First Task'" class="margin-right-1"></taskselector>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="index.js" type="module"></script>
+    <script src="js/split.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+$distances: (
+    "1": 1rem,
+    "2": 2rem,
+    "3": 3rem,
+    "4": 4rem,
+    "5": 5rem,
+    "6": 6rem,
+    "7": 7rem,
+);
+
+
+$directions: (
+    '',
+    '-bottom',
+    '-left',
+    '-right',
+    '-top',
+);
+
+$breakpoints: (
+    "xs": 480px,
+    "s": 768px,
+    "m": 1024px,
+    "l": 1200px,
+    "xl": 1400px,
+);
+
+$layoutRules: (
+    1: ("property": "display",
+        "values": (none, flex, block, inline-block, grid),
+    ),
+
+    2: ("property": "align-content",
+        "values": (center, flex-start, flex-end, space-between, space-around, space-evenly, stretch),
+    ),
+
+    2.1: ("property": "align-items",
+        "values": (center, flex-start, flex-end, stretch, baseline),
+    ),
+
+    3: ("property": "justify-content",
+        "values": (center, flex-start, flex-end, space-between, space-around, space-evenly),
+    ),
+
+    4: ("property": "flex-direction",
+        "values": (row, row-reverse, column, column-reverse),
+    ),
+
+    5: ("property": "flex-grow",
+        "values": (1, 2, 3, 4),
+    ),
+
+    6: ("property": "overflow",
+        "values": (visible, hidden, clip, scroll, auto),
+    ),
+
+    7: ("property": "position",
+        "values": (static, relative, fixed, absolute, sticky),
+    ),
+);
+
+$colors: (
+    "black": hsl(0, 0%, 0%),
+    "white": hsl(0, 0%, 100%),
+    "transparent": hsla(0, 0%, 100%, 0),
+
+    grey-100: hsl(0, 0%, 10%),
+    grey-200: hsl(0, 0%, 15%),
+    grey-300: hsl(0, 0%, 30%),
+    grey-400: hsl(0, 0%, 43%),
+    grey-500: hsl(0, 0%, 50%),
+    grey-600: hsl(0, 0%, 68%),
+    grey-700: hsl(0, 0%, 80%),
+    grey-800: hsl(0, 0%, 90%),
+    grey-900: hsl(0, 0%, 95%),
+
+    primary-100: hsl(200, 100%, 20%),
+    primary-200: hsl(200, 100%, 25%),
+    primary-300: hsl(200, 100%, 33%),
+    primary-400: hsl(200, 100%, 39%),
+    primary-500: hsl(200, 100%, 48%),
+    primary-600: hsl(200, 100%, 66%),
+    primary-700: hsl(200, 100%, 78%),
+    primary-800: hsl(200, 100%, 89%),
+    primary-900: hsl(200, 100%, 95%),
+
+    danger-100: hsl(0, 80%, 20%),
+    danger-200: hsl(0, 80%, 25%),
+    danger-300: hsl(0, 80%, 33%),
+    danger-400: hsl(0, 80%, 39%),
+    danger-500: hsl(0, 80%, 48%),
+    danger-600: hsl(0, 80%, 66%),
+    danger-700: hsl(0, 80%, 78%),
+    danger-800: hsl(0, 80%, 89%),
+    danger-900: hsl(0, 80%, 95%),
+
+    success-100: hsl(150, 80%, 20%),
+    success-200: hsl(150, 80%, 25%),
+    success-300: hsl(150, 80%, 33%),
+    success-400: hsl(150, 80%, 39%),
+    success-500: hsl(150, 80%, 48%),
+    success-600: hsl(150, 80%, 66%),
+    success-700: hsl(150, 80%, 78%),
+    success-800: hsl(150, 80%, 89%),
+    success-900: hsl(150, 80%, 95%),
+
+    warning-100: hsl(50, 80%, 20%),
+    warning-200: hsl(50, 80%, 25%),
+    warning-300: hsl(50, 80%, 33%),
+    warning-400: hsl(50, 80%, 39%),
+    warning-500: hsl(50, 80%, 48%),
+    warning-600: hsl(50, 80%, 66%),
+    warning-700: hsl(50, 80%, 78%),
+    warning-800: hsl(50, 80%, 89%),
+    warning-900: hsl(50, 80%, 95%),
+);

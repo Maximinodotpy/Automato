@@ -1,0 +1,15 @@
+@each $name, $color in $colors {
+    .bg-#{$name}{
+        background-color: $color;
+    }
+    .color-#{$name}{
+        color: $color;
+    }
+    .border-color-#{$name}{
+        border-color: $color;
+    }
+
+    :root {
+        --#{$name}: #{$color};
+    }
+}
